@@ -8,26 +8,21 @@ namespace OptionalValues.UsingEnumerable
     [DebuggerDisplay("{_data[0]}")]
     public class Option<T> : IEnumerable<T>, IOption<T>
     {
-        private static Option<T> _none = new Option<T>(new T[0]);
+        public static readonly Option<T> None = new Option<T>(new T[0]);
         private readonly T[] _data;
 
         private Option(T[] data)
             => _data = data;
 
         public static Option<T> Create(T element)
-            => null != element ? new Option<T>(new T[] { element }) : _none;
-
-        public static Option<T> None
-        {
-            get => _none;
-        }
+            => null != element ? new Option<T>(new T[] { element }) : None;
 
         public bool IsNone
         {
             get => 0 == _data.Length;
         }
 
-        public T GetValue(T defaultValue)
+        public T GetValueOrDefault(T defaultValue)
             => IsNone ? defaultValue : _data[0];
 
         public IOption<U> Apply<U>(Func<T, U> apply)

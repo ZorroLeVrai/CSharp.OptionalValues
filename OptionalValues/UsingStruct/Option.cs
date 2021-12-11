@@ -4,7 +4,7 @@ namespace OptionalValues.UsingStruct
 {
     public struct Option<T> : IOption<T>
     {
-        private static Option<T> _none = new Option<T>(default(T), true);
+        public static readonly Option<T> None = new Option<T>(default, true);
 
         private readonly T _data;
 
@@ -17,14 +17,9 @@ namespace OptionalValues.UsingStruct
         }
 
         public static IOption<T> Create(T element)
-            => null != element ? new Option<T>(element, false) : _none;
+            => null != element ? new Option<T>(element, false) : None;
 
-        public static Option<T> None
-        {
-            get => _none;
-        }
-
-        public T GetValue(T defaultValue)
+        public T GetValueOrDefault(T defaultValue)
             => IsNone ? defaultValue : _data;
 
         public IOption<U> Apply<U>(Func<T, U> apply)

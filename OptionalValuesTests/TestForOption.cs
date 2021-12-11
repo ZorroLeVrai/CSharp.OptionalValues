@@ -15,20 +15,18 @@ namespace OptionalValuesTests
             Age = age;
         }
 
-        public TestForOption AddYears(double years)
+        public TestForOption AddYears(double nbYears)
         {
-            return new TestForOption(Name, Age + 1);
+            return new TestForOption(Name, Age + nbYears);
         }
 
         public Option<double> GetDividedAge(double number)
         {
-            switch (number)
+            return number switch
             {
-                case 0.0:
-                    return Option<double>.None;
-                default:
-                    return Option<double>.Create(Age / number);
-            }
+                0.0 => Option<double>.None,
+                _ => Option<double>.Create(Age / number)
+            };
         }
     }
 }

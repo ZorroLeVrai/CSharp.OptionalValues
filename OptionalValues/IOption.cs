@@ -36,6 +36,6 @@ namespace OptionalValues
         /// </summary>
         /// <param name="defaultValue">the default value in case the Option does not have a value</param>
         /// <returns></returns>
-        T GetValue(T defaultValue);
+        T GetValueOrDefault(T defaultValue);
     }
 }

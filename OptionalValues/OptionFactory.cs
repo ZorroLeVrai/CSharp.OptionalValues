@@ -46,15 +46,12 @@ namespace OptionalValues
     {
         public static IOptionFactory Create(OptionType factoryType)
         {
-            switch (factoryType)
+            return factoryType switch
             {
-                case OptionType.UsingEnumerable:
-                    return new OptionEnumerableFactory();
-                case OptionType.UsingStruct:
-                    return new OptionStructFactory();
-                default:
-                    throw new Exception("Bad factory type");
-            }
+                OptionType.UsingEnumerable => new OptionEnumerableFactory(),
+                OptionType.UsingStruct => new OptionStructFactory(),
+                _ => throw new Exception("Bad factory type")
+            };
         }
     }
 }

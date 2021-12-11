@@ -54,7 +54,7 @@ namespace OptionalValuesTests
                 .ApplyOption(item => item.GetDividedAge(2));
 
             Assert.False(result.IsNone);
-            Assert.Equal(3, result.GetValue(0));
+            Assert.Equal(3, result.GetValueOrDefault(0));
 
             IOption<TestForOption> GetValue()
             {
